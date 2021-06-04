@@ -1,0 +1,19 @@
+package ru.job4j.job4j_chat;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
+@SpringBootApplication
+public class Job4jChatApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Job4jChatApplication.class, args);
+    }
+
+    @Bean
+    public RestTemplate getTemplate() {
+        return new RestTemplate();
+    }
+}
