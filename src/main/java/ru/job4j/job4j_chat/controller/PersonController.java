@@ -3,6 +3,7 @@ package ru.job4j.job4j_chat.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.job4j_chat.model.Person;
 import ru.job4j.job4j_chat.service.PersonService;
@@ -13,15 +14,18 @@ import java.util.List;
 @RequestMapping("/person")
 public class PersonController {
 
-    private final PersonService personService;
+    private PersonService personService;
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, BCryptPasswordEncoder encoder) {
         this.personService = personService;
+        this.encoder = encoder;
     }
 
     @PostMapping("/")
     public ResponseEntity<Person> savePerson(@RequestBody Person person) {
+        person.setPassword(encoder.encode(person.getPassword()));
         return new ResponseEntity<>(
                 personService.saveOrUpdate(person), HttpStatus.CREATED);
     }

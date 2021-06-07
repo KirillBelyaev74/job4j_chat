@@ -29,6 +29,10 @@ public class PersonService {
         return repository.findById(id).orElse(null);
     }
 
+    public Person findByLogin(String login) {
+        return repository.findByLogin(login);
+    }
+
     public void deleteById(int id) {
         repository.deleteById(id);
     }
