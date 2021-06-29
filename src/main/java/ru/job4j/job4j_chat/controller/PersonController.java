@@ -23,7 +23,7 @@ public class PersonController {
         this.encoder = encoder;
     }
 
-    @PostMapping("/")
+    @PostMapping("/sign-up")
     public ResponseEntity<Person> savePerson(@RequestBody Person person) {
         person.setPassword(encoder.encode(person.getPassword()));
         return new ResponseEntity<>(

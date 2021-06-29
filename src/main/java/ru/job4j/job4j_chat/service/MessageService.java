@@ -19,6 +19,4 @@ public class MessageService {
         messages.add(message);
         return message;
     }
-
-
 }
